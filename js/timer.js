@@ -1,6 +1,6 @@
 var timer = (function() {
-	var seconds = 6; // ganger 10
-	var secondsToStart = 0;
+	var seconds = 600; // ganger 10
+	var secondsToStart = 3;
 	
 	function countdown(callback) {
 		$(".fancybox-wrap.countdown-wrap").show();
