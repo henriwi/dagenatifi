@@ -1,5 +1,19 @@
 var io = (function() {
-	var events = JSON.parse("{\"events\": [ {\"school\": \"NTNU\", \"name\": \"Bedpress\"}, {\"school\": \"UiO\", \"name\": \"Dagen at IFI\"}, {\"school\": \"HiOA\", \"name\": \"Næringslivsdagen\"} ]}");
+
+	var events = [
+		{
+			school: "NTNU",
+			name: "Bedpress"
+		},
+		{
+			school: "UiO",
+			name: "Dagen at IFI"
+		},
+		{
+			school: "HiOA",
+			name: "Næringslivsdagen"
+		}
+	];
 
 	function postScore(name, phone, mail, points, successCallback, errorCallback) {
 		$.ajax({
@@ -22,12 +36,12 @@ var io = (function() {
 			name: name
 		};
 
-		events.events.push(event);
+		events.push(event);
 		onSuccess();
 	}
 
 	function getEvents(onSuccess) {
-		onSuccess(events.events);
+		onSuccess(events);
 	}
 
 	function getHighScoreList(callback) {
