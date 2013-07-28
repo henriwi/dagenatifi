@@ -24,9 +24,54 @@ tr {
 th {
 	color: #297F79;
 	text-align: left;
-	padding: 20px;
+	width: 33.3%;
 }
 
 td {
-	padding: 20px;
+	padding: 20px 20px 20px 0;
+}
+
+a {
+	border-bottom: 1px solid #1f1f1f;
+	border-color: #297F79;
+	text-decoration: none;
+
+	font-size: 30px;
+	text-decoration: none;
+	border-bottom: 1px solid #777;
+	margin-right: 5px;
+	text-transform: uppercase;
+}
+
+a:hover {
+	border-color: #FD5158;
+}
+
+a:visited {
+	color: #1F1F1F;
+}
+
+input {
+	padding-bottom: 4px;
+	background-color: transparent;
+	border-style: solid;
+	border-width: 0 0 1px 0;
+	border-color: #5D5D5D;
+	font-size: 50px;
+	width: 100%;
+	font-family: "Fedra Serif B Book",Georgia;
+}
+
+input::-webkit-input-placeholder {
+	color: #5D5D5D;
+	font-family: "Fedra Serif B Book",Georgia;
+}
+
+input:focus {
+	border-bottom-color: #FD5158;
+	outline: 0;
+}
+
+.last {
+	display: hidden;
 }
