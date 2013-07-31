@@ -3,15 +3,18 @@ var io = (function() {
 	var events = [
 		{
 			school: "NTNU",
-			name: "Bedpress"
+			name: "Bedpress",
+			date: new Date("2013, 7, 31")
 		},
 		{
 			school: "UiO",
-			name: "Dagen at IFI"
+			name: "Dagen at IFI",
+			date: new Date("2013, 7, 27")
 		},
 		{
 			school: "HiOA",
-			name: "Næringslivsdagen"
+			name: "Næringslivsdagen",
+			date: new Date("2013, 4, 27")
 		}
 	];
 
@@ -30,18 +33,12 @@ var io = (function() {
 		});
 	}
 
-	function createNewEvent(school, name, onSuccess, onError) {
-		var event = {
-			school: school,
-			name: name
-		};
-
+	function saveEvent(event, onSuccess, onError) {
 		events.push(event);
-		onSuccess();
 	}
 
 	function getEvents(onSuccess) {
-		onSuccess(events);
+		return events;
 	}
 
 	function getHighScoreList(callback) {
@@ -58,7 +55,7 @@ var io = (function() {
 
 	return {
 		postScore: postScore,
-		createNewEvent: createNewEvent,
+		saveEvent: saveEvent,
 		getEvents: getEvents,
 		getHighScoreList: getHighScoreList
 	}
