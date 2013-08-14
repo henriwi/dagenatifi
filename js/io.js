@@ -53,7 +53,7 @@ var io = (function() {
 			cache: false,
 			data:  {fn: "deleteEvent", eventId: eventId},
 			success: function() {
-				callback()
+				callback();
 				console.log("Event deleted");
 			},
 			error: function() {
@@ -62,10 +62,17 @@ var io = (function() {
 		});
 	}
 
-	function getEvents($scope, $http) {
+	function getEvents($scope, $http, activeEvent) {
 	  $http.get("php/io.php?fn=getEvents")
 	    .success(function(data, status, headers, config) {
 	      $scope.events = data.events;
+
+	      // Checks if an active event exists
+			  for (i = 0; i < $scope.events.length; i++) {
+			    if (!(typeof activeEvent === 'undefined') && activeEvent.id === $scope.events[i].id) {
+			      $scope.events[i].active = true;
+			    }
+			  }
 	  }).error(function(data, status, headers, config) {
 	      console.log("ERROR");
 	      console.log(data);

@@ -39,8 +39,8 @@ function fillData() {
 function bindKeys() {
 	$(document).keypress(function(event) {
       if(event.which === 13) {
-        $(document).unbind("keypress");
-        $(".start-button").click();
+        console.log("KEYPRESS");
+        // $(".start-button").click();
       }
   });
   

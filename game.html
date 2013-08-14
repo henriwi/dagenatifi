@@ -61,6 +61,12 @@
 		<section class="final-result">
 			
 			<a href="#" class="final-result-close">close</a>
+
+			
+			<p>
+					<span class="label" ng-model="selectedEvent">{{selectedEvent.name}} - {{selectedEvent.school}} ( {{selectedEvent.date | date: 'dd.MM.yyyy'}} )</span>
+			</p>
+
 			<div class="scoreline-wrap clearfix">
 				<div class="scoreline">
 					<span class="number" id="correct"></span>
@@ -75,11 +81,8 @@
 					<span class="label">poeng</span>
 				</div>
 			</div>
-			
-<!-- 			<p class="scoreline">
-					<span class="label" ng-model="selectedEvent">{{selectedEvent.name}} - {{selectedEvent.school}} ( {{selectedEvent.date | date: 'dd.MM.yyyy'}} )</span>
-			</p> -->
-			<p><input id="eventId" placeholder="Navn" type="hidden" name="eventId" value="1"/></p>
+
+			<p><input id="eventId" placeholder="Navn" type="hidden" name="eventId" value="{{selectedEvent.id}}"/></p>
 			<p><input id="participantName" placeholder="Navn" type="text" name="name"/></p>
 			<p><input id="participantPhone" placeholder="Telefonnummer" type="text" name="phone"/></p>
 			<p><input id="participantMail" placeholder="E-postadresse" type="text" name="email"/></p>

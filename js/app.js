@@ -29,7 +29,9 @@ typeApp.controller("ScoreCtrl", function($scope, $http, $routeParams) {
 });
 
 typeApp.controller("AdminCtrl", function($scope, $http, $cookieStore) {
-	io.getEvents($scope, $http);
+  //Setter io.events
+  var activeEvent = $cookieStore.get("activeEvent");
+	io.getEvents($scope, $http, activeEvent);
 
 	$scope.addEvent = function() {
 		io.saveEvent($scope.school, $scope.name, $scope.date, function() {
