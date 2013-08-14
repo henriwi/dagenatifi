@@ -71,6 +71,17 @@ var io = (function() {
 		return events;
 	}
 
+	function getParticipants() {
+		return [
+				{
+					name: "Hans",
+					phone: "22225555",
+					email: "hans@uio.no",
+					points: 58
+				}
+			]
+	}
+
 	function getHighScoreList(callback) {
 		$.ajax({
 			type: "POST",
@@ -87,6 +98,6 @@ var io = (function() {
 		postScore: postScore,
 		saveEvent: saveEvent,
 		getEvents: getEvents,
-		getHighScoreList: getHighScoreList
+		getParticipants: getParticipants
 	}
 }());

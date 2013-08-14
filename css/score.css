@@ -2,13 +2,13 @@ body {
 	font-family: "Fedra Serif B Book",Georgia;
 	background-color: #F1F1F1;
 	color: #1F1F1F;	
-	font-size: 50px;
 }
 
 .container {
 	width: 1200px;
 	margin: 0 auto;
-	padding: 50px;
+	padding: 40px;
+	font-size: 30px;
 }
 
 table {
@@ -24,27 +24,25 @@ tr {
 th {
 	color: #297F79;
 	text-align: left;
-	width: 33.3%;
+	/*width: 33.3%;*/
 }
 
 td {
 	padding: 20px 20px 20px 0;
+	vertical-align: bottom;
 }
 
 a {
 	border-bottom: 1px solid #1f1f1f;
 	border-color: #297F79;
 	text-decoration: none;
-
-	font-size: 30px;
-	text-decoration: none;
-	border-bottom: 1px solid #777;
 	margin-right: 5px;
 	text-transform: uppercase;
 }
 
 a:hover {
 	border-color: #FD5158;
+	cursor: pointer;
 }
 
 a:visited {
@@ -57,7 +55,7 @@ input {
 	border-style: solid;
 	border-width: 0 0 1px 0;
 	border-color: #5D5D5D;
-	font-size: 50px;
+	font-size: 1.1em;
 	width: 100%;
 	font-family: "Fedra Serif B Book",Georgia;
 }
@@ -72,6 +70,26 @@ input:focus {
 	outline: 0;
 }
 
+/*input.ng-invalid {
+	border-bottom-color: #FD5158;
+}*/
+
 .last {
 	display: hidden;
+}
+
+ a.icon {
+	border-bottom: none;
+}
+
+.icon-ok-sign:hover {
+	color: #297F79;
+}
+
+.icon-ok-sign.active {
+	color: #297F79;
+}
+
+.ui-datepicker-calendar a {
+	font-size: 12px;
 }
