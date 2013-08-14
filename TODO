@@ -1,0 +1,19 @@
+TODO
+
+#Routing
+#Backend
+#Vise aktivt event i game
+#Lagre score for aktiv event
+#Korrekt datovisning i admin
+#Lenker
+#	Fra admin til score-side for event
+Validering på input i admin
+Konsolider css-filer
+
+BUGS
+Unbinder ikke keypress på document i game
+Må trykke to ganger for å slette et event i admin
+	Det blir faktisk slettet etter ett trykk, men for at angular skal slette det må det to til
+
+AVKLARINGER
+Kan cookie-verdien settes lenger enn sesjonen?
