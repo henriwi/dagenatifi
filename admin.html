@@ -28,12 +28,12 @@
 					<input ng-show="event.editing" ng-model="event.name" type="text"/>
 				</td>
 				<td>
-					<span ng-hide="event.editing">{{event.date | date: 'dd.MM.yyyy'}}</span>
+					<span ng-hide="event.editing">{{event.date | date: 'yyyy-MM-dd'}}</span>
 					<input type="text" ng-show="event.editing" ng-model="event.date" datepicker />
 				</td>
 				<td>
-					<a href="#" ng-hide="event.editing" ng-click="event.editing = true">Endre</a>
-					<a href="#" ng-show="event.editing" ng-click="updateEvent($index)">Lagre</a>
+					<a ng-hide="event.editing" ng-click="event.editing = true">Endre</a>
+					<a ng-show="event.editing" ng-click="updateEvent($index)">Lagre</a>
 				</td>
 				<td><a ng-hide="event.editing" ng-click="deleteEvent($index)">Slett</a></td>
 			</tr>

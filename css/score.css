@@ -58,6 +58,7 @@ input {
 	font-size: 1.1em;
 	width: 100%;
 	font-family: "Fedra Serif B Book",Georgia;
+	color: #1F1F1F;
 }
 
 input::-webkit-input-placeholder {

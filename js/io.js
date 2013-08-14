@@ -1,59 +1,11 @@
 var io = (function() {
 
-	var events = [
-		{
-			school: "NTNU",
-			name: "Bedpress",
-			date: new Date("2013, 7, 31"),
-			participants: [
-				{
-					name: "Henrik",
-					phone: "45243706",
-					email: "henrikwingerei@gmail.com",
-					points: 167
-				},
-				{
-					name: "Ole",
-					phone: "99887766",
-					email: "ole.hansen@hioa.no",
-					points: 153
-				}
-			]
-		},
-		{
-			school: "UiO",
-			name: "Dagen at IFI",
-			date: new Date("2013, 7, 27"),
-			participants: [
-				{
-					name: "Petter",
-					phone: "12345678",
-					email: "petter@gmail.com",
-					points: 100
-				}
-			]
-		},
-		{
-			school: "HiOA",
-			name: "Næringslivsdagen",
-			date: new Date("2013, 4, 27"),
-			participants: [
-				{
-					name: "Hans",
-					phone: "22225555",
-					email: "hans@uio.no",
-					points: 58
-				}
-			]
-		}
-	];
-
-	function postScore(name, phone, mail, points, successCallback, errorCallback) {
+	function postScore(name, phone, mail, points, eventId, successCallback, errorCallback) {
 		$.ajax({
 			type: "POST",
 			url: "php/io.php",
 			cache: false,
-			data:  {fn: "postScore", name: name, phone: phone, mail: mail, points: points},
+			data:  {fn: "postScore", name: name, phone: phone, mail: mail, points: points, eventId: eventId },
 			success: function(data) {
 				successCallback(data);
 			},
@@ -63,41 +15,90 @@ var io = (function() {
 		});
 	}
 
-	function saveEvent(event) {
-		events.push(event);
-	}
-
-	function getEvents() {
-		return events;
-	}
-
-	function getParticipants() {
-		return [
-				{
-					name: "Hans",
-					phone: "22225555",
-					email: "hans@uio.no",
-					points: 58
-				}
-			]
-	}
-
-	function getHighScoreList(callback) {
+	function saveEvent(school, name, date, callback) {
 		$.ajax({
 			type: "POST",
 			url: "php/io.php",
 			cache: false,
-			data:  {fn: "getHighScoreList"},
-			success: function(data) {
-				callback(data.participants);
+			data:  {fn: "saveEvent", school: school, name: name, date: date },
+			success: function() {
+				callback();
+				console.log("Event saved");
+			},
+			error: function() {
+				 console.log("ERROR");
 			}
 		});
+	}
+
+	function updateEvent(eventId, school, name, date) {
+		$.ajax({
+			type: "POST",
+			url: "php/io.php",
+			cache: false,
+			data:  {fn: "updateEvent", eventId: eventId, school: school, name: name, date: date },
+			success: function() {
+				console.log("Event updated");
+			},
+			error: function() {
+				 console.log("ERROR");
+			}
+		});
+	}
+
+	function deleteEvent(eventId, callback) {
+		$.ajax({
+			type: "POST",
+			url: "php/io.php",
+			cache: false,
+			data:  {fn: "deleteEvent", eventId: eventId},
+			success: function() {
+				callback()
+				console.log("Event deleted");
+			},
+			error: function() {
+				 console.log("ERROR");
+			}
+		});
+	}
+
+	function getEvents($scope, $http) {
+	  $http.get("php/io.php?fn=getEvents")
+	    .success(function(data, status, headers, config) {
+	      $scope.events = data.events;
+	  }).error(function(data, status, headers, config) {
+	      console.log("ERROR");
+	      console.log(data);
+	  });
+	}
+
+	function getParticipants($scope, $http) {
+	  $http.get("php/io.php?fn=getHighScoreList")
+	    .success(function(data, status, headers, config) {
+	      $scope.participants = data.participants;
+	  }).error(function(data, status, headers, config) {
+	      console.log("ERROR");
+	      console.log(data);
+	  });
+	}
+
+	function getParticipantsForEvent(eventId, $scope, $http) {
+	  $http.get("php/io.php?fn=getHighScoreListForEvent&eventId=" + eventId)
+	    .success(function(data, status, headers, config) {
+	      $scope.participants = data.participants;
+	  }).error(function(data, status, headers, config) {
+	      console.log("ERROR");
+	      console.log(data);
+	  });
 	}
 
 	return {
 		postScore: postScore,
 		saveEvent: saveEvent,
 		getEvents: getEvents,
-		getParticipants: getParticipants
+		deleteEvent: deleteEvent,
+		updateEvent: updateEvent,
+		getParticipants: getParticipants,
+		getParticipantsForEvent: getParticipantsForEvent
 	}
 }());

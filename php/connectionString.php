@@ -1,10 +1,10 @@
 <?php
 	class ConnectionString {
 		// Enter database information
-   		private $host = '';
-   		private $username = '';
-   		private $password = '';
-   		private $database = '';
+   		private $host = 'localhost';
+   		private $username = 'root';
+   		private $password = 'root';
+   		private $database = 'dagen';
 
     	public function getHost() {
 			if ($this->isOnLocalhost()) {
@@ -31,15 +31,15 @@
     	}
 
 		public function getDatabase() {
-        	if ($this->isOnLocalhost()) {
+      if ($this->isOnLocalhost()) {
         		return 'dagen';
 			} else {
 				return $this->database;	
 			}
-    	}
+    }
     	
-    	private function isOnLocalhost() {
+    private function isOnLocalhost() {
     		return ($_SERVER['SERVER_NAME'] === 'localhost');
-    	}
+    }
 	}
 ?>

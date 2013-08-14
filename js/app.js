@@ -6,27 +6,34 @@ typeApp.config(function($locationProvider, $routeProvider) {
       templateUrl: 'admin.html',
       controller: 'AdminCtrl'
     }).
-    when('/score', {
+    when('/score/', {
+      templateUrl: 'score.html', 
+      controller: 'ScoreTotalCtrl'}).
+    when('/score/:eventId', {
       templateUrl: 'score.html', 
       controller: 'ScoreCtrl'}).
     when('/', {
-      templateUrl: 'game.html'
+      templateUrl: 'game.html',
+      controller: 'GameCtrl'
     }).
     otherwise({redirectTo: '/404'});
 });
 
-typeApp.controller("ScoreCtrl", function($scope, $cookieStore, $routeParams) {
-	$scope.participants = io.getParticipants();
+typeApp.controller("ScoreTotalCtrl", function($scope, $http) {
+	io.getParticipants($scope, $http);
 });
 
-typeApp.controller("AdminCtrl", function($scope, $cookieStore) {
-	$scope.events = io.getEvents();
+typeApp.controller("ScoreCtrl", function($scope, $http, $routeParams) {
+  var eventId = $routeParams.eventId;
+  $scope.participants = io.getParticipantsForEvent(eventId, $scope, $http);
+});
+
+typeApp.controller("AdminCtrl", function($scope, $http, $cookieStore) {
+	io.getEvents($scope, $http);
 
 	$scope.addEvent = function() {
-		io.saveEvent({
-    	school: $scope.school, 
-    	name: $scope.name,
-    	date: $scope.date,
+		io.saveEvent($scope.school, $scope.name, $scope.date, function() {
+      io.getEvents($scope, $http);
     });
 
     $scope.school = "";
@@ -36,14 +43,16 @@ typeApp.controller("AdminCtrl", function($scope, $cookieStore) {
 
   $scope.updateEvent = function(index) {
   	var eventToUpdate = $scope.events[index];
-  	//io.updateEvent({});
+    console.log(eventToUpdate);
+  	io.updateEvent(eventToUpdate.id, eventToUpdate.school, eventToUpdate.name, eventToUpdate.date);
   	eventToUpdate.editing = false;
   }
 
   $scope.deleteEvent = function(index) {
   	var eventToDelete = $scope.events[index];
-  	//io.deleteEvent(eventToDelete.id);
-  	$scope.events.splice(index, 1);
+  	io.deleteEvent(eventToDelete.id, function() {
+  	 $scope.events.splice(index, 1); 
+    });
   }
 
   $scope.setActiveEvent = function(index) {
@@ -69,7 +78,7 @@ typeApp.directive('datepicker', function() {
         link : function (scope, element, attrs, ngModelCtrl) {
             $(function(){
                 element.datepicker({
-                    dateFormat: 'dd.mm.yy',
+                    dateFormat: 'yy-mm-dd',
                     onSelect: function (date) {
                         ngModelCtrl.$setViewValue(date);
                         scope.$apply();

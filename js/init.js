@@ -59,13 +59,14 @@ function bindKeys() {
     var enterKeyCode = 13;
     
     if (event.which === enterKeyCode) {
+      var eventId = $("#eventId").val();
       var name = $("#participantName").val();
       var phone = $("#participantPhone").val();
       var mail = $("#participantMail").val();
       var points = game.getScore();
 
-      if (name && phone && mail) {
-        io.postScore(name, phone, mail, points, function(data) {
+      if (eventId && name && phone && mail) {
+        io.postScore(name, phone, mail, points, eventId, function(data) {
           $(".status-message").removeClass("status-message-error");
           $(".status-message").text("Informasjonen ble lagret.");
           $(".status-message").addClass("status-message-success");
