@@ -37,10 +37,10 @@ function fillData() {
 }
 
 function bindKeys() {
-	$(document).keypress(function(event) {
+	$(document).on("keypress", function(event) {
       if(event.which === 13) {
-        console.log("KEYPRESS");
-        // $(".start-button").click();
+        $(document).off("keypress");
+        $(".start-button").click();
       }
   });
   
