@@ -74,8 +74,13 @@ typeApp.controller("AdminCtrl", function($scope, $http, $cookieStore) {
 });
 
 typeApp.controller("GameCtrl", function($scope, $cookieStore) {
-  $scope.selectedEvent = $cookieStore.get("activeEvent");
-  console.log($scope.selectedEvent);
+  $scope.activeEvent = $cookieStore.get("activeEvent");
+
+  if (!$scope.activeEvent) {
+    alert("Velg et aktivt event fra adminsiden!");
+  }
+
+  console.log($scope.activeEvent);
 });
 
 typeApp.controller("ParticipantCtrl", function($scope, $http, $routeParams) {

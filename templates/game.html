@@ -53,12 +53,11 @@
 			
 			<a href="#" class="final-result-close">close</a>
 
-
-			<p ng-show="!selectedEvent">
+			<p ng-show="!activeEvent">
 				<span class="text-error">Velg et aktivt event fra adminsiden!</span>
 			</p>
-			<p ng-show="selectedEvent">
-					<span class="label" ng-model="selectedEvent">{{selectedEvent.name}} - {{selectedEvent.school}} ( {{selectedEvent.date | date: 'dd.MM.yyyy'}} )</span>
+			<p ng-show="activeEvent">
+					<span class="label">{{activeEvent.name}} - {{activeEvent.school}} ( {{activeEvent.date | date: 'dd.MM.yyyy'}} )</span>
 			</p>
 
 			<div class="scoreline-wrap clearfix">
