@@ -10,10 +10,15 @@ TODO
 Validering på input i admin
 Konsolider css-filer
 
+#Vis feilmelding hvis ikke noe aktivt event er valgt på game
+Hvis popup når game lastes slik at man ikke starter å spille
+#Vis epost og telefon på score-siden
+
 BUGS
-Unbinder ikke keypress på document i game
-Må trykke to ganger for å slette et event i admin
-	Det blir faktisk slettet etter ett trykk, men for at angular skal slette det må det to til
+#Unbinder ikke keypress på document i game
+#Må trykke to ganger for å slette et event i admin
+#	Det blir faktisk slettet etter ett trykk, men for at angular skal slette det må det to til
 
 AVKLARINGER
 Kan cookie-verdien settes lenger enn sesjonen?
+	Mulig å lagre i DB istedenfor

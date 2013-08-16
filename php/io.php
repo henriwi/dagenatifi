@@ -83,10 +83,33 @@
 		}
 	}
 
+	function getParticipant($participantId) {
+		$connection = getDatabaseConnection();
+
+		$participantId = mysqli_real_escape_string($connection, $participantId);
+
+		$query = "SELECT id, name, phone, mail, points FROM participant WHERE id='$participantId'";
+
+		$result = mysqli_query($connection, $query);
+		
+		if (!$result) {
+			throw new Exception("Error when doing SQL query");
+		}
+
+		$rows = array();
+
+		while ($row = mysqli_fetch_assoc($result)) {
+			$rows['participant'] = $row;
+		}
+
+		header("Content-type: application/json");
+		print json_encode($rows);
+	}
+
 	function getHighScoreList() {
 		$connection = getDatabaseConnection();
 
-		$query = "SELECT name, phone, mail, points FROM participant ORDER BY points DESC LIMIT 0, 10";
+		$query = "SELECT id, name, phone, mail, points FROM participant ORDER BY points DESC LIMIT 0, 10";
 
 		$result = mysqli_query($connection, $query);
 		
@@ -110,7 +133,7 @@
 
 		$eventId = mysqli_real_escape_string($connection, $eventId);
 
-		$query = "SELECT name, phone, mail, points FROM participant WHERE event_id=$eventId ORDER BY points DESC LIMIT 0, 10";
+		$query = "SELECT id, name, phone, mail, points FROM participant WHERE event_id=$eventId ORDER BY points DESC LIMIT 0, 10";
 
 		$result = mysqli_query($connection, $query);
 		
@@ -162,6 +185,8 @@
 			getHighScoreListForEvent($_GET['eventId']);
 		} else if ($_GET['fn'] == "getHighScoreList") {
 			getHighScoreList();
+		} else if ($_GET['fn'] == "getParticipant") {
+			getParticipant($_GET['participantId']);
 		} else if ($_GET['fn'] == "getEvents") {
 			getEvents();
 		}

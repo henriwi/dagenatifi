@@ -89,6 +89,17 @@ var io = (function() {
 	  });
 	}
 
+
+	function getParticipant(participantId, $scope, $http) {
+	  $http.get("php/io.php?fn=getParticipant&participantId=" + participantId)
+	    .success(function(data, status, headers, config) {
+	      $scope.participant = data.participant;
+	  }).error(function(data, status, headers, config) {
+	      console.log("ERROR");
+	      console.log(data);
+	  });
+	}
+
 	function getParticipantsForEvent(eventId, $scope, $http) {
 	  $http.get("php/io.php?fn=getHighScoreListForEvent&eventId=" + eventId)
 	    .success(function(data, status, headers, config) {
@@ -105,6 +116,7 @@ var io = (function() {
 		getEvents: getEvents,
 		deleteEvent: deleteEvent,
 		updateEvent: updateEvent,
+		getParticipant: getParticipant,
 		getParticipants: getParticipants,
 		getParticipantsForEvent: getParticipantsForEvent
 	}

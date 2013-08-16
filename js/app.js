@@ -3,17 +3,20 @@ typeApp.config(function($locationProvider, $routeProvider) {
   // $locationProvider.html5Mode(true);
   $routeProvider.
     when('/admin', {
-      templateUrl: 'admin.html',
+      templateUrl: 'templates/admin.html',
       controller: 'AdminCtrl'
     }).
     when('/score/', {
-      templateUrl: 'score.html', 
+      templateUrl: 'templates/score.html', 
       controller: 'ScoreTotalCtrl'}).
     when('/score/:eventId', {
-      templateUrl: 'score.html', 
+      templateUrl: 'templates/score.html', 
       controller: 'ScoreCtrl'}).
+    when('/participant/:participantId', {
+      templateUrl: 'templates/participant.html', 
+      controller: 'ParticipantCtrl'}).
     when('/', {
-      templateUrl: 'game.html',
+      templateUrl: 'templates/game.html',
       controller: 'GameCtrl'
     }).
     otherwise({redirectTo: '/404'});
@@ -26,6 +29,7 @@ typeApp.controller("ScoreTotalCtrl", function($scope, $http) {
 typeApp.controller("ScoreCtrl", function($scope, $http, $routeParams) {
   var eventId = $routeParams.eventId;
   $scope.participants = io.getParticipantsForEvent(eventId, $scope, $http);
+  console.log($scope.participants);
 });
 
 typeApp.controller("AdminCtrl", function($scope, $http, $cookieStore) {
@@ -53,7 +57,7 @@ typeApp.controller("AdminCtrl", function($scope, $http, $cookieStore) {
   $scope.deleteEvent = function(index) {
   	var eventToDelete = $scope.events[index];
   	io.deleteEvent(eventToDelete.id, function() {
-  	 $scope.events.splice(index, 1); 
+      io.getEvents($scope, $http);
     });
   }
 
@@ -70,7 +74,13 @@ typeApp.controller("AdminCtrl", function($scope, $http, $cookieStore) {
 });
 
 typeApp.controller("GameCtrl", function($scope, $cookieStore) {
-	$scope.selectedEvent = $cookieStore.get("activeEvent");
+  $scope.selectedEvent = $cookieStore.get("activeEvent");
+  console.log($scope.selectedEvent);
+});
+
+typeApp.controller("ParticipantCtrl", function($scope, $http, $routeParams) {
+  var participantId = $routeParams.participantId;
+  $scope.participant = io.getParticipant(participantId, $scope, $http);
 });
 
 typeApp.directive('datepicker', function() {

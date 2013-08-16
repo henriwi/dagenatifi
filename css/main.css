@@ -111,6 +111,10 @@ header {
 	background-color: #FD5157;
 }
 
+.text-error {
+	color: #FD5157;
+}
+
 .status-message {
 	font-family: 'Conduit ITC W01 Light', Arial;
 	font-size: 30px;
