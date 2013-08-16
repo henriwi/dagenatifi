@@ -1,0 +1,55 @@
+<head>
+	<link rel="stylesheet" href="css/score.css" type="text/css" media="screen" charset="utf-8">
+</head>
+
+<div class="container">
+	<table border="0">
+		<thead>
+			<tr>
+				<th>Aktiv</th>
+				<th>Skole</th>
+				<th>Navn</th>
+				<th>Dato</th>
+				<th>&nbsp;</th>
+				<th>&nbsp;</th>
+				<th>&nbsp;</th>
+			</tr>
+			<tr ng-repeat="event in events">
+				<td>
+					<a  class="icon" ng-click="setActiveEvent($index)">
+						<i class="icon-ok-sign" ng-class="{active: event.active}"></i>
+					</a>
+				</td>
+				<td>
+					<span ng-hide="event.editing">{{event.school}}</span>
+					<input ng-show="event.editing" ng-model="event.school" type="text"/>
+				</td>
+				<td>
+					<span ng-hide="event.editing">{{event.name}}</span>
+					<input ng-show="event.editing" ng-model="event.name" type="text"/>
+				</td>
+				<td>
+					<span ng-hide="event.editing">{{event.date | date: 'yyyy-MM-dd'}}</span>
+					<input type="text" ng-show="event.editing" ng-model="event.date" datepicker />
+				</td>
+				<td>
+					<a href="#/score/{{event.id}}" ng-hide="event.editing">Score</a>
+				</td>
+				<td>
+					<a ng-hide="event.editing" ng-click="event.editing = true">Endre</a>
+					<a ng-show="event.editing" ng-click="updateEvent($index)">Lagre</a>
+				</td>
+				<td><a ng-hide="event.editing" ng-click="deleteEvent($index)">Slett</a></td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="last">
+				<td>&nbsp;</td>
+				<td><input type="text" ng-model="school" placeholder="Skole" /></td>
+				<td><input type="text" ng-model="name" placeholder="Navn" /></td>
+				<td><input type="text" ng-model="date" datepicker /></td>
+				<td><a ng-click="addEvent()">Lagre</a></td>
+			</tr>						
+		</tbody>
+	</table>
+</div>

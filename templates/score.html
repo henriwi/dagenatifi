@@ -1,0 +1,22 @@
+<head>
+	<link rel="stylesheet" href="css/score.css" type="text/css" media="screen" charset="utf-8">
+</head>
+
+<div class="container">
+	<table border="0">
+		<thead>
+			<tr>
+				<th>Plass</th>
+				<th>Navn</th>
+				<th>Poeng</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="participant in participants">
+				<td>{{$index + 1}}</td>
+				<td><a href="#/participant/{{participant.id}}">{{participant.name}}</a></td>
+				<td>{{participant.points}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
