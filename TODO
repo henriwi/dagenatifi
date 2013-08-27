@@ -22,3 +22,6 @@ BUGS
 AVKLARINGER
 Kan cookie-verdien settes lenger enn sesjonen?
 	Mulig å lagre i DB istedenfor
+
+
+Vis skolenavn på felles high score

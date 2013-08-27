@@ -275,6 +275,14 @@ header {
 	vertical-align: baseline;	
 }
 
+.scoreline .event {
+	text-transform: uppercase;
+	color: #FD5158;
+	font-size: 60px;
+	margin-left: 10px;
+	vertical-align: baseline;	
+}
+
 input {
 	padding-bottom: 4px;
 	background-color: transparent;

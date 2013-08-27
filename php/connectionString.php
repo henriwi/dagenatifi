@@ -4,7 +4,7 @@
    		private $host = 'localhost';
    		private $username = 'root';
    		private $password = 'root';
-   		private $database = 'dagen';
+   		private $database = 'type';
 
     	public function getHost() {
 			if ($this->isOnLocalhost()) {
@@ -32,7 +32,7 @@
 
 		public function getDatabase() {
       if ($this->isOnLocalhost()) {
-        		return 'dagen';
+        		return 'type';
 			} else {
 				return $this->database;	
 			}
